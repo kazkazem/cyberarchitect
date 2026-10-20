@@ -1,0 +1,20 @@
+[
+  {
+    "slug":"room-packs","title":"Room Drawing Packs","category":"Documentation","description":"Bring the drawings for a room together. Less assembly, more attention to the details.",
+    "features":["A workflow for room drawing packs","Organise room documentation","Developed as part of the Native Family Suite"],
+    "availability":"development","distribution":"undecided","testedVersions":[],"packageVerified":false,"version":null,"releaseDate":null,"tone":"forest","art":"room",
+    "note":"Live Revit acceptance is pending. Compatibility and distribution will be confirmed before release."
+  },
+  {
+    "slug":"schedule-link","title":"Schedule Link","category":"Data","description":"A more considered connection between schedules and spreadsheets. Keep repetitive data work in its place.",
+    "features":["Schedule and spreadsheet workflow","Designed to reduce repeated data handling","Developed as part of the Native Family Suite"],
+    "availability":"development","distribution":"undecided","testedVersions":[],"packageVerified":false,"version":null,"releaseDate":null,"tone":"clay","art":"schedule",
+    "note":"Live schedule-writing acceptance is pending. Public download is not yet available."
+  },
+  {
+    "slug":"export-packages","title":"Export Packages","category":"Publishing","description":"Give drawing delivery a little more order. A dedicated workflow for preparing export packages.",
+    "features":["A dedicated export workflow","Mixed-format package preparation","Developed as part of the Native Family Suite"],
+    "availability":"development","distribution":"undecided","testedVersions":[],"packageVerified":false,"version":null,"releaseDate":null,"tone":"wine","art":"export",
+    "note":"Real PDF and CAD export acceptance is pending. Supported formats and versions will be confirmed before release."
+  }
+]

@@ -1,1 +1,10 @@
-{"name":"Cyberarchitect","founder":"Kaz","email":null,"github":null}
+{
+  "name": "Cyberarchitect",
+  "founder": "Kaz",
+  "email": null,
+  "github": "https://github.com/kazkazem/cyberarchitect",
+  "newsletter": {
+    "url": null,
+    "verified": false
+  }
+}

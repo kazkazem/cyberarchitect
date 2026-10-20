@@ -1,3 +1,4 @@
+import {feed} from '../src/launch.mjs';
 import {readFile,mkdir,writeFile,copyFile,unlink} from 'node:fs/promises';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import path from 'node:path';
@@ -12,6 +13,7 @@ export async function buildSite({outputDir=path.join(root,'dist'),products:provi
  const pages=[['','Workflow, considered.',home(products)],['tools','The collection',toolsPage(products)]];
  for(const key of ['workflow','work','journal','about','contact'])pages.push([key,({workflow:'Our approach',work:'In practice',journal:'Journal',about:'About Kaz',contact:'Let’s talk'})[key],secondaryPage(key,site)]);
  for(const key of ['audit-before-automation','studio-preview'])pages.push([`journal/${key}`,key==='studio-preview'?'A first look':'Audit before automation',secondaryPage(key,site)]);
+ for(const key of ['newsletter','resources','resources/workflow-audit','releases','guides','faq','privacy','journal/visual-stories'])pages.push([key,({'newsletter':'Studio Notes','resources':'Free resources','resources/workflow-audit':'Workflow audit worksheet','releases':'Release notes','guides':'Product guides','faq':'Frequently asked questions','privacy':'Privacy','journal/visual-stories':'One room. A clearer story.'})[key],secondaryPage(key,site)]);
  for(const p of products)pages.push([`tools/${p.slug}`,p.title,productPage(p)]);
  const generated=pages.map(([route])=>route?route+'/index.html':'index.html');
  let previous=[];try{previous=JSON.parse(await readFile(path.join(outputDir,'.generated-files.json'),'utf8'))}catch(e){if(e.code!=='ENOENT')throw e}
@@ -23,6 +25,9 @@ export async function buildSite({outputDir=path.join(root,'dist'),products:provi
  await writeFile(path.join(outputDir,'assets/favicon.svg'),'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#641f35"/><text x="14" y="47" fill="#f4f0e7" font-family="Georgia" font-size="50">c</text></svg>');
  await writeFile(path.join(outputDir,'404.html'),renderPage({title:'Page not found',path:'/404',site,body:'<section class="page-intro"><p class="eyebrow">404</p><h1>A different<br>direction.</h1><p>This page does not exist. <a class="text-link" href="/">Return to the studio ↗</a></p></section>'}));
  await writeFile(path.join(outputDir,'.generated-files.json'),JSON.stringify(generated));
+ await writeFile(path.join(outputDir,'feed.xml'),feed());
+ await writeFile(path.join(outputDir,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://cyberarchitect.io/sitemap.xml\n');
+ await writeFile(path.join(outputDir,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+pages.map(([route])=>'<url><loc>https://cyberarchitect.io/'+(route?route+'/':'')+'</loc></url>').join('')+'</urlset>');
  return pages.length;
 }
 if(process.argv[1]&&pathToFileURL(path.resolve(process.argv[1])).href===import.meta.url)console.log(`Built ${await buildSite()} pages.`);

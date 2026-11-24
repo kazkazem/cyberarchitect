@@ -12,7 +12,7 @@ export async function buildSite({outputDir=path.join(root,'dist'),products:provi
  for(const p of products){const errors=validateProduct(p);if(errors.length)throw Error(errors.join(', '))}
  const slugs=products.map(p=>p.slug);if(new Set(slugs).size!==slugs.length)throw Error('Duplicate product slug');
  const pages=[['','Workflow, considered.',home(products)],['tools','The collection',toolsPage(products)]];
- pages.push(['tools/cat','CAt for Revit',catProductPage()],['cat/access','CAt community access',catAccessPage()],['cat/licences','CAt licence management',catLicencesPage()]);
+ pages.push(['cat','CAt for Revit',catProductPage()],['cat/access','CAt community access',catAccessPage()],['cat/licences','CAt licence management',catLicencesPage()]);
  for(const key of ['workflow','work','journal','about','contact'])pages.push([key,({workflow:'Our approach',work:'In practice',journal:'Journal',about:'About Kaz',contact:'Let’s talk'})[key],secondaryPage(key,site)]);
  for(const key of ['audit-before-automation','studio-preview'])pages.push([`journal/${key}`,key==='studio-preview'?'A first look':'Audit before automation',secondaryPage(key,site)]);
  for(const key of ['newsletter','resources','resources/workflow-audit','releases','guides','faq','privacy','journal/visual-stories'])pages.push([key,({'newsletter':'Studio Notes','resources':'Free resources','resources/workflow-audit':'Workflow audit worksheet','releases':'Release notes','guides':'Product guides','faq':'Frequently asked questions','privacy':'Privacy','journal/visual-stories':'One room. A clearer story.'})[key],secondaryPage(key,site)]);

@@ -19,7 +19,7 @@ test('CAT policy includes shared launch, funding, free grace, permanent closure 
 test('CAT draft routes and their links build without exposing private handover details',async()=>{
  const dir=await mkdtemp(path.join(tmpdir(),'cat-policy-'));
  await buildSite({outputDir:dir});
- for(const route of ['tools/cat','cat/access','cat/licences']) {
+ for(const route of ['cat','cat/access','cat/licences']) {
   const html=await readFile(path.join(dir,route,'index.html'),'utf8');
   assert.doesNotMatch(html,/C:\\Users|owner token|01a187e6|cat-licenses-v1/);
   for(const [,href] of html.matchAll(/(?:href|src)="(\/[^"#?]*)"/g)) assert.ok((await stat(path.join(dir,href.endsWith('/')?href+'index.html':href))).isFile(),href);
